@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html 	xmlns:th = "http://tymeleaf.org"
+		xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://ww.thymeleaf.org/extras/spring-security5">
+<head>
+<meta charset="UTF-8">
+<title>Layout</title>
+<link rel="stylesheet"  href="../static/css/bootstrap.min.css" 	 th:href="@{css/bootstrap.min.css}">
+<link rel="stylesheet" 	href="../static/css/styles.css"			th:href="@{css/styles.css}">
+</head>
+
+<body class="body bg-image" 
+     style="background-image: url('https://wallpaperaccess.com/full/2677220.jpg');
+         background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+background-size: cover;">
+	<nav class="navbar navbar-primary" style="background-color: rgba(0, 0, 0, 0.5)">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<a class="navbar-brand " href="#">PignOnLine</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/index}">HomePage</a></li>
+				<li><a th:href="@{/articles}"> Articles List</a></li>
+				<li><a th:href="@{/article}" sec:authorize="hasRole('ROLE_ADMIN')"> Add Article</a></li>
+				<li><a th:href="@{/cart}">See cart</a></li>	
+			</ul>
+			<ul class="nav navbar-nav pull-right">
+			
+			<li><a  th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a></li>
+			<li class="authName" style="color:white" sec:authorize="isAuthenticated()">Bonjour :</li>
+			<li class="authName" style="color:white"  sec:authorize="isAuthenticated()" th:text="${auth}"></li>
+			<li><a  th:href="@{/logout}" sec:authorize="isAuthenticated()"> Logout</a></li>
+			
+			</ul>
+		</div>
+	</nav>
+	<section layout:fragment="content"></section>
+<!-- 	<div th:insert="~{/cart :: cartContent}"> -->
+			
+<!-- 	</div> -->
+</body>
+<footer>
+
+  <div class="text-white text-center p-3" style="background-color:rgba(0, 0, 0, 0.5); color: white">
+  <h3>PignOnLine</h3>
+  <p>PignOnLine is an OnlineShop created by ThePignons</p>
+    © 2022 Copyright:
+    <a>ThePignons</a>
+  </div>
+ 
+</footer>
+</html>
